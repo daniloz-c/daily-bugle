@@ -1,0 +1,762 @@
+/* ==========================================================================
+   THE DAILY BUGLE - BROADSHEET NEWSPAPER STYLESHEET (css/newspaper.css)
+   Diagramação em formato Broadsheet com colunas reais e tipografia vetorial
+   que NUNCA EMBAÇA ao aplicar zoom (subpixel antialiasing e otimização).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   FOLHA DO JORNAL (BROADSHEET PAPER)
+   -------------------------------------------------------------------------- */
+.broadsheet-paper {
+  position: relative;
+  width: 1080px;
+  min-height: 1560px;
+  background-color: #f6f2e8;
+  color: #111111;
+  padding: 22px 28px 28px 28px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.7),
+    0 2px 10px rgba(0, 0, 0, 0.5),
+    inset 0 0 50px rgba(160, 140, 110, 0.2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  /* Garantia de Nitidez Vetorial Absoluta ao Ampliar (Não embaça) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Grão sutil de fibra de papel */
+.paper-grain-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 65%, rgba(120, 95, 65, 0.08) 100%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.012) 0px, rgba(0, 0, 0, 0.012) 1px, transparent 1px, transparent 2px);
+  mix-blend-mode: multiply;
+  z-index: 10;
+}
+
+/* Vinco de dobra horizontal central */
+.center-fold-crease {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.07) 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(0, 0, 0, 0.07) 100%);
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* --------------------------------------------------------------------------
+   CABEÇALHO & LOGOTIPO (MASTHEAD)
+   -------------------------------------------------------------------------- */
+.broadsheet-masthead {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Teasers Superiores (Boxes Pretos Duplos) */
+.top-teasers-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+
+.teaser-card {
+  border: 2px solid #000000;
+  background: #fdfbf7;
+  padding: 6px 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.teaser-card:hover {
+  background: #f4edd9;
+}
+
+.teaser-kicker {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #111111;
+  line-height: 1.1;
+  letter-spacing: -0.2px;
+}
+
+.teaser-title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #000000;
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  margin: 3px 0 5px 0;
+  text-transform: uppercase;
+}
+
+.teaser-badge {
+  background: #000000;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 2px 0;
+  margin: 0 -10px;
+  text-transform: uppercase;
+}
+
+/* Faixa de Tradição */
+.tagline-banner {
+  display: flex;
+  align-items: center;
+  margin: 4px 0 7px 0;
+}
+
+.tagline-banner::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: #b51a1a;
+  margin-left: 10px;
+}
+
+.tagline-text {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #b51a1a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Tarja Vermelha do Logotipo Daily Bugle */
+.masthead-red-box {
+  width: 100%;
+  background-color: #c91111;
+  border: 4px solid #000000;
+  padding: 5px;
+  margin-bottom: 6px;
+  box-shadow: inset 0 0 0 1.5px #000000;
+}
+
+.masthead-inner-border {
+  border: 2px solid #000000;
+  background-color: #c41313;
+  padding: 4px 12px;
+}
+
+.bugle-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.brand-word-daily,
+.brand-word-bugle {
+  font-family: var(--font-headline);
+  font-size: 5.4rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 0.9;
+  text-shadow:
+    -2.5px -2.5px 0 #000,
+    2.5px -2.5px 0 #000,
+    -2.5px 2.5px 0 #000,
+    2.5px 2.5px 0 #000,
+    5px 6px 0 #000000;
+}
+
+.brand-emblem-wrap {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.emblem-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(3px 4px 0px #000000);
+}
+
+/* Faixa Dateline */
+.dateline-stripe {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2.5px solid #000000;
+  border-bottom: 2.5px solid #000000;
+  padding: 4px 2px;
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: 0.3px;
+}
+
+.dateline-info-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dateline-info-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-price {
+  font-weight: 900;
+  font-size: 0.9rem;
+}
+
+.bullet {
+  opacity: 0.4;
+}
+
+/* ==========================================================================
+   MANCHETE MASSIVA "ENOUGH!"
+   ========================================================================== */
+.giant-headline-wrapper {
+  width: 100%;
+  text-align: center;
+  border-bottom: 4px solid #000000;
+  padding: 20px 0 10px;
+  /* antes era apenas padding-bottom: 4px */
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.giant-headline-wrapper:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.giant-headline-text {
+  font-family: var(--font-headline);
+  font-size: 10.8rem;
+  font-weight: 900;
+  color: #080808;
+  line-height: 1.2;
+  letter-spacing: -3px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  transform: scaleY(1.08);
+}
+
+/* ==========================================================================
+   GRID BROADSHEET EM MÚLTIPLAS COLUNAS
+   ========================================================================== */
+.broadsheet-grid {
+  display: grid;
+  grid-template-columns: 5.6fr 2.4fr 2.4fr;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Linha de separação entre colunas (column rules) */
+.grid-col-side {
+  border-left: 1px solid #111111;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.article-block {
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.15s ease;
+  padding: 4px;
+}
+
+.article-block:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+
+/* Kicker de seção */
+.section-kicker-rule {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  border-bottom: 1.5px solid #000;
+  padding-bottom: 2px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  color: var(--bugle-red);
+}
+
+/* ==========================================================================
+   COLUNA PRINCIPAL (HERO STORY)
+   ========================================================================== */
+.grid-span-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subheadline-display {
+  font-family: var(--font-headline);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #111111;
+  line-height: 1.0;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.deck-lead {
+  font-family: var(--font-editorial);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #222222;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.byline-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 3px 0;
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #444;
+}
+
+.byline-bar.compact {
+  justify-content: flex-start;
+  margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   FOTOS DE JORNAL (FIGURES & CAPTIONS)
+   ========================================================================== */
+.newspaper-figure {
+  width: 100%;
+  border: 2px solid #000000;
+  background: #000000;
+  margin-bottom: 8px;
+  position: relative;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.figure-image-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #111;
+}
+
+.press-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: contrast(1.15) brightness(0.98);
+  image-rendering: -webkit-optimize-contrast;
+  transition: transform 0.3s ease;
+}
+
+.newspaper-figure:hover .press-photo {
+  transform: scale(1.015);
+}
+
+/* Flash de Câmera */
+.camera-flash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.camera-flash-overlay.flash-active {
+  animation: flash-burst 0.35s ease-out;
+}
+
+@keyframes flash-burst {
+  0% {
+    opacity: 1;
+  }
+
+  35% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Faixa "SPECIAL EDITION" na foto hero */
+.diagonal-edition-sash {
+  position: absolute;
+  bottom: 25px;
+  right: -55px;
+  background-color: #d11919;
+  color: #ffffff;
+  transform: rotate(-34deg);
+  width: 240px;
+  text-align: center;
+  padding: 5px 0;
+  border-top: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  z-index: 8;
+  pointer-events: none;
+}
+
+.diagonal-edition-sash span {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* Legenda de foto de jornal */
+.photo-caption {
+  background: #f9f6ef;
+  border-top: 1px solid #000;
+  padding: 5px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.photo-credit {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 900;
+  color: #222;
+  letter-spacing: 0.6px;
+}
+
+.caption-text {
+  font-family: var(--font-editorial);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: #2b2520;
+}
+
+/* ==========================================================================
+   TIPOGRAFIA DAS COLUNAS (LETRINHAS MIÚDAS COM ALTA NITIDEZ)
+   ========================================================================== */
+.story-columns-duo {
+  columns: 2;
+  column-gap: 16px;
+  column-rule: 1px solid #222;
+  font-family: var(--font-editorial);
+  font-size: 0.8rem;
+  line-height: 1.42;
+  color: #1a1714;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.story-columns-duo p,
+.story-single-column p {
+  margin-bottom: 7px;
+  text-indent: 1.2em;
+}
+
+.paragraph-dropcap::first-letter {
+  font-size: 3.2rem;
+  float: left;
+  line-height: 0.8;
+  padding: 4px 6px 0 0;
+  font-family: var(--font-headline);
+  font-weight: 900;
+  color: #0c0b0a;
+}
+
+.story-single-column {
+  font-family: var(--font-editorial);
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: #1a1714;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.side-article-title {
+  font-family: var(--font-headline);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #111;
+  line-height: 1.05;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.side-deck {
+  font-family: var(--font-editorial);
+  font-size: 0.78rem;
+  font-style: italic;
+  line-height: 1.3;
+  color: #333;
+}
+
+.article-jump-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed #444;
+  padding-top: 4px;
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #555;
+}
+
+.btn-read-article {
+  background: none;
+  border: none;
+  color: var(--bugle-red);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 900;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: color 0.15s;
+}
+
+.btn-read-article:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   EDITORIAL DO J. JONAH JAMESON & BRIEFS
+   ========================================================================== */
+.editorial-box-highlight {
+  border: 2px solid #000000;
+  background: #f3ede2;
+  padding: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.editorial-box-highlight:hover {
+  background: #ede3d3;
+}
+
+.editorial-header-banner {
+  background: #000000;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-align: center;
+  padding: 2px 0;
+  margin: -8px -8px 6px -8px;
+}
+
+.editorial-title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #111;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.editorial-byline {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 900;
+  color: var(--bugle-red);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.editorial-snippet {
+  font-family: var(--font-editorial);
+  font-size: 0.74rem;
+  font-style: italic;
+  line-height: 1.38;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.brief-box {
+  border-top: 1.5px solid #000;
+  padding-top: 6px;
+  margin-top: 6px;
+}
+
+.brief-title {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: #111;
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.brief-text {
+  font-family: var(--font-editorial);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: #333;
+}
+
+/* ==========================================================================
+   RODAPÉ DO JORNAL (BROADSHEET FOOTER)
+   ========================================================================== */
+.broadsheet-footer {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.footer-red-strip {
+  background-color: #c91212;
+  border: 3.5px solid #000000;
+  padding: 6px 12px;
+  text-align: center;
+}
+
+.footer-banner-text {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 1.5px 1.5px 0px #000000;
+}
+
+.footer-press-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1.5px solid #000;
+  padding-top: 4px;
+  margin-top: 5px;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #555;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================================
+   FILTROS DE IMPRESSÃO
+   ========================================================================== */
+.theme-vintage .broadsheet-paper {
+  background-color: #f4eee2;
+  filter: sepia(0.06) contrast(1.04);
+}
+
+.theme-halftone .broadsheet-paper {
+  background-color: #ede7dc;
+}
+
+.theme-halftone .broadsheet-paper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.theme-bw .broadsheet-paper {
+  background-color: #f2f2f2;
+  filter: grayscale(1) contrast(1.18);
+}
+
+.theme-modern .broadsheet-paper {
+  background-color: #ffffff;
+  filter: none;
+}
+
+/* ==========================================================================
+   ESTILOS DE IMPRESSÃO (@media print)
+   ========================================================================== */
+@media print {
+
+  body,
+  html {
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .pressreader-app-container,
+  .pressreader-viewport,
+  .newspaper-stage {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  .broadsheet-paper {
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    filter: none !important;
+  }
+
+  .paper-grain-layer,
+  .center-fold-crease {
+    display: none !important;
+  }
+}

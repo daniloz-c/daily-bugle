@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>The Daily Bugle - Simulador de Jornal Real Broadsheet (PressReader)</title>
+  <meta name="description" content="Simulador de jornal de papel real no formato Broadsheet clássico com navegação Pan & Zoom ultra nítido estilo PressReader. Manchete ENOUGH! e matérias exclusivas com fotos de Peter Parker.">
+  
+  <!-- Google Fonts: Tipografia Clássica de Imprensa Jornalística -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&family=Special+Elite&display=swap" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/newspaper.css">
+</head>
+<body class="theme-vintage">
+
+  <div class="pressreader-app-container">
+
+    <!-- ====================================================================
+         BARRA SUPERIOR DE CONTROLES ESTILO PRESSREADER
+         ==================================================================== -->
+    <header class="pressreader-topbar no-print" role="toolbar" aria-label="Controles do Leitor">
+      <div class="topbar-left">
+        <div class="bugle-brand-badge">
+          <span class="brand-name">DAILY BUGLE</span>
+          <span class="brand-edition">BROADSHEET PRESSREADER</span>
+        </div>
+        <div class="reading-hint">
+          <span class="hint-icon">🔍</span>
+          <span class="hint-text">Gire a <strong>roda do mouse</strong> ou arraste para ler as letrinhas miúdas</span>
+        </div>
+      </div>
+
+      <!-- Controles Centrais de Zoom -->
+      <div class="topbar-center">
+        <div class="zoom-controls-cluster">
+          <button id="btn-zoom-out" class="reader-tool-btn" title="Diminuir Zoom (Mouse wheel)">
+            <span>−</span>
+          </button>
+          
+          <span id="zoom-indicator" class="zoom-indicator-text" title="Nível de ampliação atual">100%</span>
+
+          <button id="btn-zoom-in" class="reader-tool-btn" title="Aumentar Zoom (Mouse wheel)">
+            <span>+</span>
+          </button>
+
+          <span class="toolbar-divider"></span>
+
+          <button id="btn-zoom-fit" class="reader-preset-btn" title="Ajustar página inteira na tela">
+            Ajustar Página
+          </button>
+
+          <button id="btn-zoom-100" class="reader-preset-btn active" title="Tamanho de escala real (100%)">
+            100%
+          </button>
+
+          <button id="btn-zoom-reading" class="reader-preset-btn" title="Zoom de 200% para ler todas as letrinhas miúdas">
+            200% (Leitura)
+          </button>
+        </div>
+      </div>
+
+      <!-- Controles da Direita (Filtro, Som, Impressão, Tela Cheia) -->
+      <div class="topbar-right">
+        <div class="filter-dropdown-wrap">
+          <label for="filter-select" class="sr-only">Filtro de Papel</label>
+          <select id="filter-select" class="reader-select" title="Filtro visual de papel impresso">
+            <option value="vintage" selected>Jornal 2002 (Creme)</option>
+            <option value="halftone">Retícula Halftone (Impressão)</option>
+            <option value="bw">Preto e Branco Noir</option>
+            <option value="modern">Papel Branco Nítido</option>
+          </select>
+        </div>
+
+        <button id="btn-toggle-sound" class="reader-tool-btn" title="Efeitos sonoros de jornal e câmera">
+          <span id="sound-icon">🔊</span>
+        </button>
+
+        <button id="btn-print" class="reader-tool-btn" title="Imprimir jornal ou salvar em PDF">
+          <span>🖨️</span>
+        </button>
+
+        <button id="btn-fullscreen" class="reader-tool-btn" title="Modo Tela Cheia">
+          <span id="fullscreen-icon">⛶</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Ticker de Notícias Dinâmico -->
+    <div class="pressreader-ticker no-print">
+      <span class="ticker-tag">PLANTÃO DO CLARIM:</span>
+      <div class="ticker-scroll-track" id="ticker-track">
+        JAMESON EXIGE PRISÃO DO HOMEM-ARANHA • POLÍCIA ENCONTRA CRIMINOSO AMARRADO EM POSTE DA 5ª AVENIDA COM TEIA ADESIVA • OSCORP PROMETE NOVAS TECNOLOGIAS AEROESPACIAIS
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         VIEWPORT DE NAVEGAÇÃO INFINITA (PAN & ZOOM PRESSREADER)
+         ==================================================================== -->
+    <main class="pressreader-viewport" id="reader-viewport" aria-label="Visualizador do Jornal">
+      
+      <!-- Estágio com aceleração por GPU para zoom e pan sem embaçar -->
+      <div class="newspaper-stage" id="newspaper-stage">
+        
+        <!-- FOLHA REAL DE JORNAL BROADSHEET (1050px de largura vetorial) -->
+        <article class="broadsheet-paper" id="newspaper-sheet" role="document">
+          
+          <!-- Efeitos realistas de textura de papel e vinco -->
+          <div class="paper-grain-layer"></div>
+          <div class="center-fold-crease"></div>
+
+          <!-- ================================================================
+               SEÇÃO 1: CABEÇALHO COMPLETO DO DAILY BUGLE
+               ================================================================ -->
+          <header class="broadsheet-masthead">
+            
+            <!-- Teasers Superiores em Caixas Pretas Duplas -->
+            <div class="top-teasers-row">
+              <div class="teaser-card teaser-left" data-article-target="sky_acrobat" title="Clique para ler esta reportagem">
+                <span class="teaser-kicker">New Clues Foreshadow</span>
+                <span class="teaser-title">SPIDEY, GOBLIN ATTACKS</span>
+                <span class="teaser-badge">PAGE 3</span>
+              </div>
+
+              <div class="teaser-card teaser-right" data-article-target="nypd_cops" title="Clique para ler esta reportagem">
+                <span class="teaser-kicker">Police: New Leads In Solving</span>
+                <span class="teaser-title">SPIDER-MAN CRIME SPREE</span>
+                <span class="teaser-badge">PAGE 8</span>
+              </div>
+            </div>
+
+            <!-- Faixa de Tradição -->
+            <div class="tagline-banner">
+              <span class="tagline-text">New York's Favorite Newspaper Since 1932</span>
+            </div>
+
+            <!-- O Grande Logotipo Vermelho do Daily Bugle -->
+            <div class="masthead-red-box">
+              <div class="masthead-inner-border">
+                <div class="bugle-brand-row">
+                  <span class="brand-word-daily">DAILY</span>
+                  <div class="brand-emblem-wrap">
+                    <img src="assets/images/bugle-emblem.svg" alt="Clarim com Coroa de Louros" class="emblem-svg">
+                  </div>
+                  <span class="brand-word-bugle">BUGLE</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Barra de Data, Edição, Meteorologia e Preço -->
+            <div class="dateline-stripe">
+              <div class="dateline-info-left">
+                <span class="info-edition">MORNING EDITION</span>
+                <span class="bullet">•</span>
+                <span class="info-date">SEPTEMBER 18, 2026</span>
+                <span class="bullet">•</span>
+                <span class="info-weather">Partly Cloudy / High 68°F</span>
+                <span class="bullet">•</span>
+                <span class="info-page">Weather: Page 28</span>
+              </div>
+              <div class="dateline-info-right">
+                <span class="info-web">www.dailybugle.com</span>
+                <span class="info-price">50¢</span>
+              </div>
+            </div>
+
+            <!-- A MANCHETE GIGANTE "ENOUGH!" -->
+            <div class="giant-headline-wrapper" data-article-target="hero" title="Clique para ler a matéria completa">
+              <h1 class="giant-headline-text">ENOUGH!</h1>
+            </div>
+
+          </header>
+
+          <!-- ================================================================
+               SEÇÃO 2: CORPO DO JORNAL EM MÚLTIPLAS COLUNAS (BROADSHEET GRID)
+               ================================================================ -->
+          <div class="broadsheet-grid">
+
+            <!-- COLUNA 1 & 2: MANCHETE PRINCIPAL & FOTO HERO (CLARABOIA) -->
+            <section class="grid-span-main article-block" id="article-hero" data-article-id="hero">
+              <div class="hero-headline-sub">
+                <h2 class="subheadline-display">Citizens Call for Wall-Crawler's Arrest</h2>
+                <p class="deck-lead">
+                  Rising public alarm over masked vigilante actions sweeps through City Hall and Manhattan precincts as civic leaders demand immediate surrender.
+                </p>
+                <div class="byline-bar">
+                  <span class="author-name">BY BETTY BRANT &amp; RON SACCO</span>
+                  <span class="desk-tag">BUGLE SPECIAL INVESTIGATION</span>
+                </div>
+              </div>
+
+              <!-- FOTO PRINCIPAL: HOMEM-ARANHA NA CLARABOIA COM CIDADE ABAIXO -->
+              <figure class="newspaper-figure hero-figure" id="hero-photo-figure" title="Foto exclusiva de Peter Parker (Clique para acionar o flash)">
+                <div class="figure-image-wrap">
+                  <img src="assets/images/spiderman_enough_hd.png" alt="Homem-Aranha rastejando na claraboia de vidro sobre Nova York" class="press-photo">
+                  <div class="camera-flash-overlay" id="camera-flash-fx"></div>
+                  <div class="diagonal-edition-sash">
+                    <span>SPECIAL EDITION</span>
+                  </div>
+                </div>
+                <figcaption class="photo-caption">
+                  <span class="photo-credit">PHOTO BY PETER PARKER</span>
+                  <span class="caption-text">
+                    <strong>SUSPECT CAUGHT ON FILM:</strong> The costumed vigilante known as Spider-Man is photographed prowling upon glass skylights overlooking central Manhattan. Moments later, he fled into the city shadows.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <!-- Texto da matéria em colunas jornalísticas reais (Letrinhas Miúdas) -->
+              <div class="story-columns-duo">
+                <p class="paragraph-dropcap">
+                  The debate that has polarized New York City for weeks reached a fever pitch yesterday as civic groups, shopkeepers, and community leaders banded together outside One Police Plaza to demand decisive action against the masked figure known as Spider-Man.
+                </p>
+                <p>
+                  What began as sporadic sightings of a bizarre acrobat swinging from Manhattan suspension bridges has metastasized into a full-scale vigilante crisis. Eyewitnesses across four boroughs recount unauthorized interventions, damaged masonry, and harrowing confrontations that leave citizens questioning whether they are witnessing a savior or a menace.
+                </p>
+                <p>
+                  "He operates outside any constitutional oversight," declared City Council representative Arthur Vance during a fiery press briefing. "Who sanctioned this individual to enforce his own brand of street justice? How can our men and women in uniform maintain public safety when an anonymous acrobat drops from the clouds without accountability?"
+                </p>
+                <p>
+                  Police Commissioner George Stacy confirmed that specialized task units have been mobilized to track the suspect's movements. Authorities urge citizens not to approach the costumed figure, warning that despite unconfirmed reports of thwarted muggings, the legal liability and public endangerment posed by unauthorized vigilantism cannot be tolerated.
+                </p>
+                <p>
+                  Meanwhile, inside the buzzing newsroom of The Daily Bugle, calls continue to flood the editorial desk, with eyewitnesses reporting sightings from Hell's Kitchen to Queens Boulevard. As night falls, the question echoes louder than ever across the metropolis: Who will hold the Wall-Crawler to account?
+                </p>
+              </div>
+
+              <div class="article-jump-badge">
+                <span>[CONTINUES ON PAGE 4, COLUMN 2]</span>
+                <button class="btn-read-article" data-article="hero">Ler Matéria Completa ↗</button>
+              </div>
+            </section>
+
+            <!-- COLUNA 3: SEGUNDA IMAGEM ENVIADA (POLICIAIS OLHANDO PARA O POSTE) -->
+            <section class="grid-col-side article-block" id="article-nypd" data-article-id="nypd_cops">
+              <div class="section-kicker-rule">POLICE &amp; METRO</div>
+              
+              <h3 class="side-article-title">POLICE BAFFLED: Suspect Strung Up on Lamp Post</h3>
+              <p class="side-deck">Officers arrive at Fifth Ave to find armed car thief dangling twenty feet in mid-air in synthetic cocoon.</p>
+              
+              <div class="byline-bar compact">
+                <span class="author-name">BY EDDIE BROCK</span>
+              </div>
+
+              <!-- Foto 1 enviada pelo usuário (Polícia de NY e Homem-Aranha no poste) -->
+              <figure class="newspaper-figure side-figure" title="Foto de Peter Parker: Policiais perplexos">
+                <div class="figure-image-wrap">
+                  <img src="assets/images/spiderman_nypd_cops.png" alt="Policiais de NY olhando para cima com espanto para o Homem-Aranha no poste" class="press-photo">
+                </div>
+                <figcaption class="photo-caption">
+                  <span class="photo-credit">PHOTO BY PETER PARKER</span>
+                  <span class="caption-text">
+                    <strong>BEWILDERED OFFICERS:</strong> Three NYPD patrolmen gaze upward in astonishment as Spider-Man secures a fleeing carjacker to a lamppost before vanishing into the alleyways.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <div class="story-single-column">
+                <p>
+                  Patrolmen from the 18th Precinct were greeted by a surreal spectacle at 11:42 p.m. last evening. Responding to a silent alarm triggered during an attempted vehicle heist, officers arrived at 53rd Street only to find the armed suspect dangling upside down like a cocoon.
+                </p>
+                <p>
+                  Witnesses reported that the suspect, identified as 34-year-old Dennis Carradine, was attempting to hotwire a luxury sedan when a red-and-blue figure dropped from the fire escape above. Within forty-five seconds, Carradine was bound in an unidentified white adhesive substance and hoisted toward the fixture.
+                </p>
+                <p>
+                  "We pulled up with sirens blazing, and there he was," remarked Officer O'Hanlon. "The guy was hollering for us to cut him down, and right above on the lamppost, the masked freak was just perched there, staring at us with those blank white eyes."
+                </p>
+                <p>
+                  Forensic experts from the NYPD Crime Lab are currently analyzing the bizarre adhesive webbing, which officers noted began dissolving into harmless dust approximately two hours after application.
+                </p>
+              </div>
+
+              <div class="article-jump-badge">
+                <button class="btn-read-article" data-article="nypd_cops">Ler Matéria Completa ↗</button>
+              </div>
+            </section>
+
+            <!-- COLUNA 4: TERCEIRA IMAGEM ENVIADA (SALTO NOS ARRANHA-CÉUS) & EDITORIAL -->
+            <section class="grid-col-side article-block" id="article-sky" data-article-id="sky_acrobat">
+              <div class="section-kicker-rule">SKYLINE SPECTACLE</div>
+
+              <h3 class="side-article-title">HIGH-FLYING ACROBAT: Wall-Crawler Vaults Skyline</h3>
+              
+              <!-- Foto 2 enviada pelo usuário (Salto acrobático nos arranha-céus) -->
+              <figure class="newspaper-figure side-figure" title="Salto nos arranha-céus">
+                <div class="figure-image-wrap">
+                  <img src="assets/images/spiderman_skyscrapers_leap.png" alt="Homem-Aranha em salto acrobático entre prédios de Manhattan" class="press-photo">
+                </div>
+                <figcaption class="photo-caption">
+                  <span class="photo-credit">PHOTO BY PETER PARKER</span>
+                  <span class="caption-text">
+                    <strong>AERIAL DAREDEVIL:</strong> A stunning high-altitude capture showing the costumed vigilante executing an acrobatic dive hundreds of feet above downtown skyscrapers.
+                  </span>
+                </figcaption>
+              </figure>
+
+              <div class="story-single-column">
+                <p>
+                  Commuters peering from the upper decks of the Staten Island Ferry and office workers in the Financial District were treated to a jaw-dropping aerial display yesterday afternoon when the city's self-appointed protector was seen traversing the skyline at dizzying speeds.
+                </p>
+                <p>
+                  Federal Aviation Administration spokespersons voiced grave concern regarding the unregulated trajectory of the acrobat, who reportedly passed within fifty yards of a traffic-monitoring helicopter near the Brooklyn Bridge.
+                </p>
+                <p>
+                  "The kinetic forces and spatial awareness exhibited surpass any Olympic-level gymnast by orders of magnitude," remarked Dr. Curt Connors of Empire State University.
+                </p>
+              </div>
+
+              <!-- EDITORIAL DO J. JONAH JAMESON -->
+              <div class="editorial-box-highlight" data-article-id="editorial">
+                <div class="editorial-header-banner">
+                  <span>EDITORIAL OPINION</span>
+                </div>
+                <h4 class="editorial-title">PUBLIC MENACE NUMBER ONE</h4>
+                <span class="editorial-byline">BY J. JONAH JAMESON | EDITOR-IN-CHIEF</span>
+                <p class="editorial-snippet">
+                  "What kind of man wears a mask? An honest doctor? A courageous firefighter? A sworn police officer? No! Criminals wear masks! Cowards who don't want anyone to see their guilty faces wear masks! The Daily Bugle will not rest until this freak faces justice!"
+                </p>
+                <button class="btn-read-article" data-article="editorial">Ler Editorial Completo ↗</button>
+              </div>
+
+              <!-- NOTÍCIA DA OSCORP -->
+              <div class="brief-box" data-article-id="oscorp_brief">
+                <h5 class="brief-title">OSCORP ANNOUNCES NEW DEFENSE CONTRACT</h5>
+                <p class="brief-text">
+                  Dr. Norman Osborn addresses board members at midtown headquarters, promising military trials for proprietary human-performance enhancers.
+                </p>
+              </div>
+
+            </section>
+
+          </div>
+
+          <!-- ================================================================
+               SEÇÃO 3: RODAPÉ DE DESTAQUE EXCLUSIVO (BOTTOM BANNER)
+               ================================================================ -->
+          <footer class="broadsheet-footer">
+            <div class="footer-red-strip">
+              <p class="footer-banner-text">
+                INSIDE: EXCLUSIVE BUGLE PICS CAPTURE SPIDER-MAN'S MISDEEDS — FULL 12-PAGE DOSSIER
+              </p>
+            </div>
+            <div class="footer-press-info">
+              <span>THE DAILY BUGLE • 39th Street &amp; Second Avenue, New York, N.Y. 10017</span>
+              <span>INDEX: Business B1, Sports C1, Classifieds D4, Comics D8, Weather Page 28</span>
+            </div>
+          </footer>
+
+        </article>
+      </div>
+
+      <!-- ==================================================================
+           MINI-MAPA NAVEGADOR ESTILO PRESSREADER (BOTTOM-RIGHT NAVIGATOR)
+           ================================================================== -->
+      <aside class="press-mini-navigator no-print" id="press-navigator" aria-label="Navegador em miniatura">
+        <div class="navigator-header">
+          <span class="nav-title">NAVEGADOR</span>
+          <button id="btn-toggle-nav" class="nav-collapse-btn" title="Minimizar navegador">−</button>
+        </div>
+        <div class="navigator-preview" id="navigator-preview">
+          <!-- Miniatura visual da página do jornal -->
+          <div class="nav-thumb-page">
+            <div class="nav-thumb-masthead"></div>
+            <div class="nav-thumb-headline"></div>
+            <div class="nav-thumb-grid">
+              <div class="nav-thumb-col-large"></div>
+              <div class="nav-thumb-col-mid"></div>
+              <div class="nav-thumb-col-small"></div>
+            </div>
+            <div class="nav-thumb-footer"></div>
+          </div>
+          <!-- Retângulo vermelho que representa a câmera visível atual -->
+          <div class="navigator-lens" id="navigator-lens"></div>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- ====================================================================
+         PAINEL LATERAL DE LEITURA DE ARTIGO (SMART ARTICLE DRAWER)
+         ==================================================================== -->
+    <aside class="article-reader-drawer no-print" id="article-drawer" aria-hidden="true" role="dialog" aria-labelledby="drawer-title">
+      <div class="drawer-header">
+        <div class="drawer-category-badge" id="drawer-category">NOTÍCIA DO CLARIM</div>
+        <button class="drawer-close-btn" id="btn-close-drawer" aria-label="Fechar Leitor">&times;</button>
+      </div>
+
+      <div class="drawer-scroll-body">
+        <h2 class="drawer-headline" id="drawer-headline">ENOUGH!</h2>
+        <p class="drawer-subheadline" id="drawer-subheadline">Citizens Call for Wall-Crawler's Arrest</p>
+        
+        <div class="drawer-meta-bar">
+          <span id="drawer-byline" class="drawer-byline">POR BETTY BRANT</span>
+          <span id="drawer-date" class="drawer-date">18 DE SETEMBRO DE 2026</span>
+        </div>
+
+        <figure class="drawer-figure" id="drawer-figure" style="display: none;">
+          <img src="" alt="" id="drawer-image" class="drawer-img">
+          <figcaption id="drawer-caption" class="drawer-caption-text"></figcaption>
+        </figure>
+
+        <div class="drawer-paragraphs" id="drawer-paragraphs">
+          <!-- Parágrafos inseridos dinamicamente pelo Controller/View -->
+        </div>
+
+        <div class="drawer-footer-actions">
+          <button class="btn-drawer-action" id="btn-drawer-listen">
+            <span>🔊</span> Ouvir Artigo
+          </button>
+          <button class="btn-drawer-action" id="btn-drawer-print">
+            <span>🖨️</span> Imprimir Artigo
+          </button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Scripts MVC -->
+  <script src="js/models/NewspaperModel.js"></script>
+  <script src="js/views/NewspaperView.js"></script>
+  <script src="js/controllers/NewspaperController.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
