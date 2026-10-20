@@ -1,0 +1,86 @@
+[
+  {
+    "title": "DID SPIDER-MAN QUIT? ENOUGH!",
+    "subtitle": "The vigilante's suit turns up in a Manhattan alley as Jameson celebrates and crime surges across the city.",
+    "content": "Last night, a passerby stumbled over a trash can in a 43rd Street alley and made the discovery of the century: the discarded suit of the notorious Spider-Man. Witnesses say a hooded figure walked away into the pouring rain without looking back.\n\nFor months, the Daily Bugle has warned New York authorities about the instability of an unregistered masked vigilante. The NYPD cordoned off the area to test web residue for ballistic and chemical evidence. With the vigilante off the streets, the Crime Syndicate is already moving into the central districts, while City Hall refuses to comment on the hero's sudden disappearance.",
+    "author": "Peter Parker",
+    "image_url": "/assets/images/homem-aranha-capa-e1785195345395.webp",
+    "image_caption": "Peter Parker's exclusive photo: Spider-Man's suit discarded among the trash in Manhattan.",
+    "category": "CITY CRISIS",
+    "headline_type": "CRISIS",
+    "editorial_quote": "\"I warned New York! This guy is a coward who ran as soon as the heat got turned up. A public menace finally admitting defeat! But stay alert—if he comes back, the Bugle will be here!\" — J. Jonah Jameson",
+    "badge_text": "BUGLE EXCLUSIVE"
+  },
+  {
+    "title": "THREAT OR HERO? TIMES SQUARE UNDER SIEGE",
+    "subtitle": "A battle with the Green Goblin destroys three police cruisers and shuts down Seventh Avenue during rush hour.",
+    "content": "The heart of New York became a battlefield yesterday afternoon when the Green Goblin's infamous glider tore across the Times Square sky, hurling pumpkin bombs at glowing billboards. Spider-Man leapt between skyscrapers to meet him in a dizzying aerial duel that sent scaffolding crashing onto civilian vehicles.\n\nNo lives were lost, thanks to improvised web nets, but property damage is estimated at $4 million. Police arrived after both masked figures had vanished into the city's haze.",
+    "author": "Betty Brant",
+    "image_url": "/assets/images/spiderman_nypd_cops.png",
+    "image_caption": "Police cruisers surround the battle scene as the masked vigilante escapes across the rooftops.",
+    "category": "URBAN WARFARE",
+    "headline_type": "MENACE",
+    "editorial_quote": "\"A hero? Who pays for the wrecked pavement and burning squad cars? Who gave this bug the authority to play target practice in Times Square? Put him on trial!\" — J. Jonah Jameson",
+    "badge_text": "EXTRA EDITION"
+  },
+  {
+    "title": "DEATH-DEFYING LEAP: SPIDER-MAN STOPS MID-AIR HEIST!",
+    "subtitle": "Exclusive photos show the wall-crawler saving a cash-transport helicopter over the East River.",
+    "content": "In an astonishing display of superhuman agility, Spider-Man shot a web line from the cables of the Brooklyn Bridge to intercept a helicopter whose rotors had been sabotaged by armed goons.\n\nThe pilot said the masked hero's intervention kept the aircraft from crashing into passenger ferries on the river. Before rescue crews arrived, the vigilante swung toward the skyscrapers of the Financial District.",
+    "author": "Peter Parker",
+    "image_url": "/assets/images/spiderman_skyscrapers_leap.png",
+    "image_caption": "Peter Parker captures the split-second acrobatic leap between buildings.",
+    "category": "HISTORIC FEAT",
+    "headline_type": "HERO",
+    "editorial_quote": "\"If the pilot knew how to fly, why did Spider-Man interfere? Maybe he loosened the rotor bolts himself just to pose as a hero in Parker's pictures! I'm not buying it!\" — J. Jonah Jameson",
+    "badge_text": "PHOTO OF THE YEAR"
+  },
+  {
+    "title": "DOC OCK RAIDS ROXXON LABS!",
+    "subtitle": "Mechanical tentacles tear through a vault; Spider-Man arrives too late, and scientists demand answers.",
+    "content": "Dr. Otto Octavius, known in police reports as Doctor Octopus, led a surgical strike on Roxxon Corporation's advanced labs early this morning. With four titanium tentacles, the criminal smashed through hardened steel walls and stole experimental quantum power cells.\n\nSpider-Man arrived minutes after the alarm sounded but was driven back by a concussive blast. Federal police have issued a high alert for the East Coast.",
+    "author": "Ned Leeds",
+    "image_url": "/assets/images/images.jpg",
+    "image_caption": "Mechanical tentacle marks scar the reinforced concrete at the Roxxon entrance.",
+    "category": "SCIENTIFIC CRIME",
+    "headline_type": "MYSTERY",
+    "editorial_quote": "\"Where was everyone's favorite neighborhood hero? Probably selling pictures of himself to some two-bit paper! Meanwhile, dangerous technology is falling into terrorists' hands!\" — J. Jonah Jameson",
+    "badge_text": "POLICE ALERT"
+  },
+  {
+    "title": "SUBWAY PANIC: WEB OF STEEL STOPS RUNAWAY TRAIN",
+    "subtitle": "Line 4 brakes fail beneath the Harlem River; the vigilante anchors the entire train with reinforced webs.",
+    "content": "More than 600 passengers faced terror early today when an express train on Line 4 lost its electric brakes near the end of the track. Spider-Man positioned himself in front of the train and fired dozens of web lines into the tunnel's support beams.\n\nThe strain brought the train to a stop less than six feet from the terminal wall. MTA engineers say the web's chemical strength is unprecedented in polymer engineering.",
+    "author": "Peter Parker",
+    "image_url": "/assets/images/spiderman_skyscrapers_leap.png",
+    "image_caption": "The extraordinary effort to slow a 200-ton train in the subway tunnel.",
+    "category": "DRAMATIC RESCUE",
+    "headline_type": "HERO",
+    "editorial_quote": "\"Line 4 service was held up for four hours while they cleaned that goo! Good citizens missed meetings and doctor's appointments because this show-off had to make a scene!\" — J. Jonah Jameson",
+    "badge_text": "HEROISM OR VANDALISM?"
+  },
+  {
+    "title": "VIGILANTE EVADES POLICE!",
+    "subtitle": "A rooftop chase through Manhattan ends with the masked vigilante vanishing into the city skyline.",
+    "content": "Police units closed in on a masked vigilante near Fifth Avenue, turning a routine patrol into a rooftop chase through Midtown. Witnesses watched as Spider-Man swung between the buildings, dodging spotlights and squad cars before disappearing above the city streets.\n\nThe mayor called on the NYPD to bring the so-called hero in for questioning. Officers say the pursuit caused no injuries, but traffic backed up for blocks as crowds gathered to watch the chase. The Daily Bugle will continue following this developing story.",
+    "author": "Betty Brant",
+    "image_url": "/assets/images/spiderman_nypd_cops.png",
+    "image_caption": "Spider-Man makes a daring escape as police close in on a Manhattan street.",
+    "category": "POLICE PURSUIT",
+    "headline_type": "MYSTERY",
+    "editorial_quote": "\"The mayor is right: force must net the bug! New York cannot let a masked vigilante stay ahead of the law.\" — J. Jonah Jameson",
+    "badge_text": "POLICE CHIEF SPEAKS OUT"
+  },
+  {
+    "title": "RHINO TOPPLES STREETLIGHTS ON WALL STREET: POLICE STEP IN",
+    "subtitle": "The armored brute tried to raid stock exchange vaults before being wrapped in web cocoons.",
+    "content": "Aleksei Sytsevich, the Rhino, brought Wall Street to a halt at the opening bell this morning. Cars flew like toys into the facades of historic banks.\n\nSpider-Man used the villain's own weight to drive him into a high-pressure fire hydrant, freezing his armor and binding his joints with polymer webs until the SWAT team arrived.",
+    "author": "Peter Parker",
+    "image_url": "/assets/images/homem-aranha-capa-e1785195345395.webp",
+    "image_caption": "The armored brute falls onto the cracked pavement.",
+    "category": "PUBLIC SAFETY",
+    "headline_type": "HERO",
+    "editorial_quote": "\"Wall Street lost half a billion in trades because of this pandemonium! Who's going to reimburse the brokers? I demand Spider-Man be held liable!\" — J. Jonah Jameson",
+    "badge_text": "MARKET IMPACT"
+  }
+]

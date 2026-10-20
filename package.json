@@ -1,0 +1,32 @@
+{
+  "name": "daily-bugle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node server/app.js",
+    "client": "npm --prefix client run dev",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"yellow,cyan\" \"node server/app.js\" \"npm --prefix client run dev\"",
+    "build": "npm --prefix client run build",
+    "start": "node server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniloz-c/daily-bugle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/daniloz-c/daily-bugle/issues"
+  },
+  "homepage": "https://github.com/daniloz-c/daily-bugle#readme",
+  "dependencies": {
+    "concurrently": "^10.0.5",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "rss-parser": "^3.13.0"
+  }
+}

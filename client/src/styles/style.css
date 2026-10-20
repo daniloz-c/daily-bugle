@@ -1,0 +1,614 @@
+/* ==========================================================================
+   THE DAILY BUGLE - PRESSREADER UI & VIEWPORT (css/style.css)
+   ========================================================================== */
+
+:root {
+  --reader-bg: #12100e;
+  --reader-wood: #1e1915;
+  --reader-bar-bg: #1f1a16;
+  --reader-bar-border: #382e26;
+  --bugle-red: #c81313;
+  --bugle-red-dark: #980e0e;
+  --brass-accent: #c49a3c;
+  --text-light: #ece4db;
+  --text-muted: #a39282;
+
+  --font-headline: 'Anton', 'Impact', sans-serif;
+  --font-logo: 'Oswald', sans-serif;
+  --font-serif-title: 'Playfair Display', Georgia, serif;
+  --font-editorial: 'Libre Baskerville', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-typewriter: 'Special Elite', 'Courier Prime', monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--reader-bg);
+  color: var(--text-light);
+  font-family: var(--font-sans);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Container do Leitor PressReader */
+.pressreader-app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background: 
+    radial-gradient(circle at 50% 30%, rgba(40, 32, 25, 0.7) 0%, rgba(12, 10, 8, 0.98) 100%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 2px, transparent 2px, transparent 4px);
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR (PRESSREADER TOPBAR)
+   ========================================================================== */
+.pressreader-topbar {
+  height: 52px;
+  background: linear-gradient(180deg, #26201b 0%, #1a1613 100%);
+  border-bottom: 2px solid var(--reader-bar-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.bugle-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-name {
+  background: var(--bugle-red);
+  color: #ffffff;
+  font-family: var(--font-logo);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.6);
+}
+
+.brand-edition {
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  color: var(--brass-accent);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.reading-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.reading-hint strong {
+  color: #f0e6d6;
+}
+
+/* Cluster de Zoom */
+.topbar-center {
+  display: flex;
+  align-items: center;
+}
+
+.zoom-controls-cluster {
+  display: flex;
+  align-items: center;
+  background: #110e0c;
+  border: 1px solid #4a3e33;
+  border-radius: 5px;
+  padding: 2px;
+  gap: 3px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.reader-tool-btn {
+  background: linear-gradient(180deg, #332a22 0%, #221c17 100%);
+  color: #eeddc9;
+  border: 1px solid #4d3e31;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.reader-tool-btn:hover {
+  background: linear-gradient(180deg, #44382e 0%, #2f2720 100%);
+  border-color: var(--brass-accent);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.reader-tool-btn:active {
+  transform: translateY(1px);
+}
+
+.zoom-indicator-text {
+  font-family: var(--font-logo);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--brass-accent);
+  padding: 0 0.6rem;
+  min-width: 54px;
+  text-align: center;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 22px;
+  background: #3f342b;
+  margin: 0 4px;
+}
+
+.reader-preset-btn {
+  background: transparent;
+  color: #c9b9a8;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.reader-preset-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.reader-preset-btn.active {
+  background: var(--brass-accent);
+  color: #120e06;
+}
+
+/* Lado Direito */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.reader-select {
+  background: #110e0c;
+  color: #f1ede5;
+  border: 1px solid #4d3e31;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.reader-select:hover, .reader-select:focus {
+  border-color: var(--brass-accent);
+}
+
+/* Ticker de Notícias */
+.pressreader-ticker {
+  height: 24px;
+  background: #090807;
+  border-bottom: 1px solid #29211a;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  overflow: hidden;
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  z-index: 990;
+  flex-shrink: 0;
+}
+
+.ticker-tag {
+  background: #f59e0b;
+  color: #000;
+  font-weight: 900;
+  padding: 1px 6px;
+  margin-right: 0.8rem;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+.ticker-scroll-track {
+  color: #d1c7b8;
+  white-space: nowrap;
+  animation: ticker-loop 35s linear infinite;
+  display: inline-block;
+  padding-left: 100%;
+}
+
+@keyframes ticker-loop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ==========================================================================
+   VIEWPORT INFINITO (PAN & ZOOM AREA)
+   ========================================================================== */
+.pressreader-viewport {
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - 76px);
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+
+.pressreader-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+/* Palco de Transformação */
+.newspaper-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ==========================================================================
+   MINI-MAPA NAVEGADOR ESTILO PRESSREADER (NAVIGATOR THUMBNAIL)
+   ========================================================================== */
+.press-mini-navigator {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 160px;
+  background: rgba(22, 18, 15, 0.92);
+  backdrop-filter: blur(8px);
+  border: 2px solid #4a3e33;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75);
+  z-index: 1100;
+  overflow: hidden;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.press-mini-navigator.collapsed .navigator-preview {
+  display: none;
+}
+
+.navigator-header {
+  background: #171310;
+  border-bottom: 1px solid #3d3329;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-title {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--brass-accent);
+  letter-spacing: 1px;
+}
+
+.nav-collapse-btn {
+  background: none;
+  border: none;
+  color: #a89888;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.nav-collapse-btn:hover {
+  color: #ffffff;
+}
+
+.navigator-preview {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #2b2520;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+/* Miniatura gráfica do jornal */
+.nav-thumb-page {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  right: 8px;
+  bottom: 6px;
+  background: #e8e2d5;
+  border: 1px solid #111;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.nav-thumb-masthead {
+  height: 14px;
+  background: var(--bugle-red);
+}
+
+.nav-thumb-headline {
+  height: 12px;
+  background: #111111;
+  margin: 2px 0;
+}
+
+.nav-thumb-grid {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+}
+
+.nav-thumb-col-large {
+  flex: 2;
+  background: #333333;
+}
+
+.nav-thumb-col-mid {
+  flex: 1;
+  background: #555555;
+}
+
+.nav-thumb-col-small {
+  flex: 1;
+  background: #777777;
+}
+
+.nav-thumb-footer {
+  height: 8px;
+  background: var(--bugle-red);
+}
+
+/* Retângulo da Câmera (Lens) */
+.navigator-lens {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid #ef4444;
+  background: rgba(239, 68, 68, 0.22);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  transition: width 0.05s linear, height 0.05s linear;
+}
+
+/* ==========================================================================
+   PAINEL LATERAL DE LEITURA (SMART ARTICLE DRAWER)
+   ========================================================================== */
+.article-reader-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 480px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #fdfbf7;
+  color: #1a1714;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  transform: translateX(105%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.article-reader-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  background: #e9e2d5;
+  border-bottom: 2px solid #111;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drawer-category-badge {
+  font-family: var(--font-logo);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bugle-red);
+  letter-spacing: 1px;
+}
+
+.drawer-close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.drawer-close-btn:hover {
+  color: var(--bugle-red);
+}
+
+.drawer-scroll-body {
+  padding: 1.8rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.drawer-headline {
+  font-family: var(--font-headline);
+  font-size: 2.5rem;
+  line-height: 1.0;
+  color: #0c0b0a;
+  text-transform: uppercase;
+}
+
+.drawer-subheadline {
+  font-family: var(--font-serif-title);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2b2520;
+  line-height: 1.25;
+}
+
+.drawer-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #706253;
+  border-top: 1px solid #dcd4c6;
+  border-bottom: 1px solid #dcd4c6;
+  padding: 0.5rem 0;
+}
+
+.drawer-figure {
+  width: 100%;
+  margin: 0.5rem 0;
+  border: 2px solid #111;
+}
+
+.drawer-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.drawer-caption-text {
+  background: #ede6da;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: #332c25;
+  border-top: 1px solid #111;
+}
+
+.drawer-paragraphs {
+  font-family: var(--font-editorial);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #1a1714;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.drawer-paragraphs p::first-letter {
+  font-size: 2.2rem;
+  float: left;
+  line-height: 1;
+  padding-right: 6px;
+  font-family: var(--font-serif-title);
+  font-weight: 900;
+  color: var(--bugle-red);
+}
+
+.drawer-footer-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dcd4c6;
+}
+
+.btn-drawer-action {
+  flex: 1;
+  background: #2b241d;
+  color: #f7efe6;
+  border: 1px solid #4a3e32;
+  padding: 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+}
+
+.btn-drawer-action:hover {
+  background: var(--bugle-red);
+  border-color: #000;
+  color: #fff;
+}
+
+/* Responsividade da Toolbar */
+@media (max-width: 950px) {
+  .reading-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .pressreader-topbar {
+    height: auto;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pressreader-viewport {
+    height: calc(100vh - 110px);
+  }
+
+  .press-mini-navigator {
+    bottom: 10px;
+    right: 10px;
+    width: 120px;
+  }
+  
+  .navigator-preview {
+    height: 160px;
+  }
+}
